@@ -19,17 +19,8 @@
 
     <!-- attributes -->
 
-    <color name="primary">@color/main_blue</color>
+    <color name="primary">#81269d</color>
     <color name="primary_dark">@color/blue_dark</color>
     <color name="accent">@color/pink</color>
-    <color name="colorLightTextPrimary">@color/white</color>
-    <color name="colorDarkTextPrimary">@color/black</color>
-    <color name="colorDarkTextSecondary">@color/black_alpha55</color>
-    <color name="colorLightHint">@color/white_alpha30</color>
-    <color name="colorLightDivider">@color/white_alpha30</color>
-    <color name="colorDarkHint">@color/black_alpha55</color>
-    <color name="colorPressedTint">@color/black_alpha30</color>
-    <color name="colorGoogle">@color/white</color>
-    <color name="lightWindowBg">@color/white</color>
 
 </resources>

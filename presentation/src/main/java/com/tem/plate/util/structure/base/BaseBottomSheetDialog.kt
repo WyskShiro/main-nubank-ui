@@ -11,7 +11,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tem.plate.R
 import com.tem.plate.container.ContainerActivity
-import com.tem.plate.databinding.LoadingPlaceholderBinding
 import com.tem.plate.util.extensions.observeAction
 import com.tem.plate.util.extensions.observeEvent
 import com.tem.plate.util.extensions.showDialog
@@ -26,7 +25,6 @@ import javax.inject.Inject
 abstract class BaseBottomSheetDialog : BottomSheetDialogFragment(), HasAndroidInjector {
 
     abstract val baseViewModel: BaseViewModel
-    abstract val loadingPlaceholderBinding: LoadingPlaceholderBinding?
     protected val parentActivity: ContainerActivity by lazy { activity as ContainerActivity }
     private var fragmentDialog: Dialog? = null
 
@@ -52,7 +50,6 @@ abstract class BaseBottomSheetDialog : BottomSheetDialogFragment(), HasAndroidIn
     @CallSuper
     protected open fun subscribe() {
         baseViewModel.dialog.observeEvent(viewLifecycleOwner, ::onGetDialog)
-        baseViewModel.placeholder.observeAction(viewLifecycleOwner, ::onPlaceholder)
     }
 
     protected fun setupExpanded() {
@@ -64,9 +61,5 @@ abstract class BaseBottomSheetDialog : BottomSheetDialogFragment(), HasAndroidIn
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             bottomSheetBehavior.peekHeight = bottomSheet.height
         }
-    }
-
-    private fun onPlaceholder(placeholder: Placeholder?) {
-        loadingPlaceholderBinding?.placeholderShouldAppear = placeholder?.visible()
     }
 }

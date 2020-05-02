@@ -18,8 +18,8 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    dataBinding {
-        enabled true
+    viewBinding {
+        enabled = true
     }
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -66,6 +66,7 @@ dependencies {
 
     // glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     implementation "androidx.constraintlayout:constraintlayout:1.1.3"

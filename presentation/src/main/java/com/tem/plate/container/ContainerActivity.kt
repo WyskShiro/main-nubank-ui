@@ -1,14 +1,15 @@
 package com.tem.plate.container
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.tem.plate.R
 import com.tem.plate.databinding.ActivityContainerBinding
 import com.tem.plate.fragment1.Fragment1
 import com.tem.plate.util.di.scopes.FragmentScope
+import com.tem.plate.util.extensions.shortToast
 import com.tem.plate.util.structure.base.BaseActivity
 import com.tem.plate.util.structure.base.BaseViewModel
 import com.tem.plate.util.viewmodels.Placeholder
@@ -25,25 +26,15 @@ class ContainerActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_container)
+        super.onCreate(savedInstanceState)
+        binding = ActivityContainerBinding.inflate(layoutInflater)
         lifecycle.addObserver(viewModel)
         setupUi()
-        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
     }
 
     private fun setupUi() {
         // Set clicklisteners and textListeners
-    }
-
-    private fun onNextPlaceholder(placeholder: Placeholder?) {
-        placeholder?.let { binding.includedLoading.placeholderShouldAppear = it.visible() }
-    }
-
-    companion object {
-
-        fun createIntent(context: Context): Intent {
-            return Intent(context, ContainerActivity::class.java)
-        }
     }
 }
 
