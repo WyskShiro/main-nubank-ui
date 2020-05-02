@@ -6,12 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import com.tem.plate.util.structure.arch.Event
 import com.tem.plate.util.structure.arch.EventObserver
 
-fun <T> defaultMutableLiveData(t: T?): MutableLiveData<T> {
-    val liveData = MutableLiveData<T>()
-    liveData.value = t
-    return liveData
-}
-
 fun <T> LiveData<T>.observeAction(owner: LifecycleOwner, observer: (T?) -> Unit) {
     observe(owner, androidx.lifecycle.Observer { observer(it) })
 }

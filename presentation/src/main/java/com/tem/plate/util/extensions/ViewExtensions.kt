@@ -32,13 +32,3 @@ fun View.setOnClickHandler(callback: () -> Unit) {
         setOnClickListener(this::onClick)
     }
 }
-
-// views
-
-fun View.setVisible(visible: Boolean) {
-    visibility = if (visible) View.VISIBLE else View.GONE
-}
-
-fun View.isVisible(): Boolean {
-    return visibility == View.VISIBLE
-}

@@ -3,8 +3,8 @@ package com.tem.plate.container
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.pandora.bottomnavigator.BottomNavigator
 import com.tem.plate.R
 import com.tem.plate.databinding.ActivityContainerBinding
@@ -21,7 +21,7 @@ class ContainerActivity : BaseActivity() {
     override val baseViewModel: BaseViewModel get() = viewModel
 
     private lateinit var binding: ActivityContainerBinding
-    private val viewModel: ContainerViewModel by viewModels()
+    private val viewModel = ViewModelProvider(this).get(ContainerViewModel::class.java)
     private lateinit var navigator: BottomNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {

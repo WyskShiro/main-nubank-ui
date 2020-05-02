@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tem.plate.util.extensions.observeEvent
 import com.tem.plate.util.extensions.shortToast
 import com.tem.plate.util.extensions.showDialog
-import com.tem.plate.util.structure.navigation.NavData
-import com.tem.plate.util.structure.navigation.Navigator
 import com.tem.plate.util.viewmodels.DialogData
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -59,12 +57,6 @@ abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
                 true
             }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun onNextNavigation(navData: NavData?) {
-        navData?.let {
-            Navigator.goTo(this, it)
         }
     }
 }

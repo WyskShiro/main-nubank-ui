@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Template.iml" filepath="$PROJECT_DIR$/Template.iml" group="Template" />
       <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" group="Template/data" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" group="Template/domain" />
+      <module fileurl="file://$PROJECT_DIR$/main-nubank-ui-Template.iml" filepath="$PROJECT_DIR$/main-nubank-ui-Template.iml" group="Template" />
       <module fileurl="file://$PROJECT_DIR$/presentation/presentation.iml" filepath="$PROJECT_DIR$/presentation/presentation.iml" group="Template/presentation" />
     </modules>
   </component>
