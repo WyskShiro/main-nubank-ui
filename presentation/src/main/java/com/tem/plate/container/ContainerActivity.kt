@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.pandora.bottomnavigator.BottomNavigator
 import com.tem.plate.R
 import com.tem.plate.databinding.ActivityContainerBinding
 import com.tem.plate.fragment1.Fragment1
@@ -21,38 +20,19 @@ class ContainerActivity : BaseActivity() {
     override val baseViewModel: BaseViewModel get() = viewModel
 
     private lateinit var binding: ActivityContainerBinding
-    private val viewModel = ViewModelProvider(this).get(ContainerViewModel::class.java)
-    private lateinit var navigator: BottomNavigator
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(ContainerViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_container)
         lifecycle.addObserver(viewModel)
-        navigator = BottomNavigator.onCreate(
-            fragmentContainer = R.id.fragment_container,
-            bottomNavigationView = findViewById(R.id.bottomnav_view),
-            rootFragmentsFactory = mapOf(
-                R.id.fragment1 to { Fragment1() }
-            ),
-            defaultTab = R.id.fragment1,
-            activity = this
-        )
         setupUi()
         super.onCreate(savedInstanceState)
     }
 
-    override fun onBackPressed() {
-        if (!navigator.pop()) {
-            super.onBackPressed()
-        }
-    }
-
     private fun setupUi() {
         // Set clicklisteners and textListeners
-    }
-
-    override fun subscribeUi() {
-        super.subscribeUi()
-        // Set listeners to observeAction viewmodel livedatas
     }
 
     private fun onNextPlaceholder(placeholder: Placeholder?) {
