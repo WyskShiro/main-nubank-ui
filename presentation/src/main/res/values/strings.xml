@@ -2,8 +2,8 @@
     <!--
         GLOBAL
     -->
-    <string name="app_name">Template</string>
-    <string name="title">The marvelous pokemon template</string>
+    <string name="app_name">Nubank UI</string>
+    <string name="title">Nubank UI</string>
 
     <!--
         DIALOG
@@ -13,4 +13,17 @@
 
     <string name="global_ok">OK</string>
     <string name="global_cancel">Cancel</string>
+
+    <!-- Main activity -->
+    <string name="main_bank_name">Banco 260 - Nu Pagamentos S.A.</string>
+    <string name="main_agency">Agência %d</string>
+    <string name="main_account_number">Conta %s</string>
+
+    <!-- Main Menu Options -->
+    <string name="main_menu_option_help_me">Me ajuda</string>
+    <string name="main_menu_option_profile">Perfil</string>
+    <string name="main_menu_option_account_configure">Configurar conta</string>
+    <string name="main_menu_option_card_configure">Configurar Cartão</string>
+    <string name="main_menu_option_ask_pj_account">Pedir conta PJ</string>
+    <string name="main_menu_option_app_configurations">Configurações do app</string>
 </resources>

@@ -31,6 +31,7 @@ class ContainerActivity : BaseActivity() {
         lifecycle.addObserver(viewModel)
         setupUi()
         setContentView(binding.root)
+
     }
 
     private fun setupUi() {
