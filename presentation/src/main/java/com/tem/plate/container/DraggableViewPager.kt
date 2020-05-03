@@ -9,40 +9,25 @@ import kotlin.math.absoluteValue
 class DraggableViewPager @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null
-): ViewPager(context, attributeSet) {
+) : ViewPager(context, attributeSet) {
 
-    var dX = 0f
-    var dY = 0f
-
-    private var originalX: Float
-    private var originalY: Float
     private var callback: ((MotionEvent) -> Unit)? = null
-
-    init {
-        originalX = x
-        originalY = y
-    }
-    override fun onInterceptHoverEvent(event: MotionEvent?): Boolean {
-        event?.let {
-
-        }
-        return super.onInterceptHoverEvent(event)
-    }
 
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
         ev?.let {
-            if (wasTopToBottomScroll(it) || it.actionMasked == MotionEvent.ACTION_UP) {
+            if (wasTopToBottomScroll(it)) {
                 callback?.invoke(it)
+                return@let false
+            } else {
+                return@let true
             }
         }
         return super.onTouchEvent(ev)
     }
 
-    fun setCallback(callback: (MotionEvent) ->Unit) {
+    fun setCallback(callback: (MotionEvent) -> Unit) {
         this.callback = callback
     }
-
-    var downY: Float = 0f
 
     var currentY = 0f
     var currentX = 0f
@@ -52,18 +37,15 @@ class DraggableViewPager @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {
                 currentX = event.x
                 currentY = event.y
-                downY = event.y
                 true
             }
             MotionEvent.ACTION_MOVE -> {
-                if (currentX.minus(event.x).absoluteValue > currentY.minus(event.y).absoluteValue)
-                    return false
-                return downY - event.y < 0
+                return (currentX - event.x).absoluteValue < (currentY - event.y).absoluteValue
             }
             MotionEvent.ACTION_UP -> {
                 currentX = 0f
                 currentY = 0f
-                downY - event.y < 0
+                true
             }
             else -> false
         }

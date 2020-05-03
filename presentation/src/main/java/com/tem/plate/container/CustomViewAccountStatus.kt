@@ -44,10 +44,13 @@ class CustomViewAccountStatus @JvmOverloads constructor(
                 dY = originalY - motionEvent.rawY
             }
             MotionEvent.ACTION_MOVE -> {
-                animate()
-                    .y(motionEvent.rawY + dY)
-                    .setDuration(0)
-                    .start()
+                val newY = motionEvent.rawY + dY
+                if (newY >= originalY) {
+                    animate()
+                        .y(newY)
+                        .setDuration(0)
+                        .start()
+                }
             }
             MotionEvent.ACTION_UP -> {
                 animate()
