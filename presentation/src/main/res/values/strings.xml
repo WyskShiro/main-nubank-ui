@@ -28,4 +28,7 @@
     <string name="main_menu_option_card_configure">Configurar Cartão</string>
     <string name="main_menu_option_ask_pj_account">Pedir conta PJ</string>
     <string name="main_menu_option_app_configurations">Configurações do app</string>
+    <string name="global_credit_card">Cartão de crédito</string>
+    <string name="example_payment_description">Compra mais recente em XXXXX no valor de R$ 28,98 quinta</string>
+    <string name="fragment_credit_card_current_invoice">Fatura atual</string>
 </resources>

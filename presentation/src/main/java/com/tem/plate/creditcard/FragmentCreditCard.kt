@@ -6,24 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.tem.plate.R
-import com.tem.plate.databinding.Fragment1Binding
+import com.tem.plate.creditcard.FragmentCreditCardViewModel
+import com.tem.plate.databinding.FragmentCreditCardBinding
 import com.tem.plate.util.di.ViewModelFactory
 import com.tem.plate.util.structure.base.BaseFragment
 import com.tem.plate.util.structure.base.BaseViewModel
-import kotlinx.android.synthetic.main.fragment1.view.*
 import javax.inject.Inject
 
-class Fragment1 : BaseFragment(R.layout.fragment1) {
+class FragmentCreditCard : BaseFragment(R.layout.fragment_credit_card) {
     override val baseViewModel: BaseViewModel get() = viewModel
 
     @Inject
-    protected lateinit var viewModelFactory: ViewModelFactory<Fragment1ViewModel>
+    protected lateinit var viewModelFactory: ViewModelFactory<FragmentCreditCardViewModel>
 
     private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(Fragment1ViewModel::class.java)
+        ViewModelProvider(this, viewModelFactory).get(FragmentCreditCardViewModel::class.java)
     }
 
-    private var _binding: Fragment1Binding? = null
+    private var _binding: FragmentCreditCardBinding? = null
 
     private val binding get() = _binding!!
 
@@ -32,7 +32,7 @@ class Fragment1 : BaseFragment(R.layout.fragment1) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = Fragment1Binding.inflate(inflater, container, false)
+        _binding = FragmentCreditCardBinding.inflate(inflater, container, false)
         return binding.root
     }
 

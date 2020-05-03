@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tem.domain.entity.RecyclerItem
 import com.tem.plate.R
 import com.tem.plate.databinding.ActivityContainerBinding
-import com.tem.plate.fragment1.Fragment1
+import com.tem.plate.fragment1.FragmentCreditCard
+//import com.tem.plate.fragment1.Fragment1
 import com.tem.plate.util.di.ViewModelFactory
 import com.tem.plate.util.di.scopes.FragmentScope
 import com.tem.plate.util.extensions.getLineDivider
@@ -39,6 +40,7 @@ class ContainerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityContainerBinding.inflate(layoutInflater)
         setupUi()
+        setupViewPager()
         setContentView(binding.root)
     }
 
@@ -63,6 +65,10 @@ class ContainerActivity : BaseActivity() {
             addItemDecoration(getLineDivider())
         }
     }
+
+    private fun setupViewPager() {
+        binding.customViewAccountStatus.setAdapter(supportFragmentManager)
+    }
 }
 
 @Module
@@ -70,5 +76,5 @@ interface ContainerActivityModule {
 
     @ContributesAndroidInjector
     @FragmentScope
-    fun contributesFragment1(): Fragment1
+    fun contributesFragmentCreditCard(): FragmentCreditCard
 }
