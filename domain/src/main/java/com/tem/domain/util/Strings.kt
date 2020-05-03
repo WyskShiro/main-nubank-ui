@@ -21,5 +21,6 @@ interface Strings {
     val mainMenuOptionCardConfigure: String
     val mainMenuOptionAskPjAccount: String
     val mainMenuOptionAppConfigurations: String
+    val mainAccountLogout: String
 
 }

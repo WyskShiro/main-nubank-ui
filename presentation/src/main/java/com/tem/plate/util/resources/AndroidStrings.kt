@@ -28,6 +28,7 @@ class AndroidStrings @Inject constructor(context: Context) : Strings {
     override val mainMenuOptionCardConfigure: String get() = res(R.string.main_menu_option_card_configure)
     override val mainMenuOptionAskPjAccount: String get() = res(R.string.main_menu_option_ask_pj_account)
     override val mainMenuOptionAppConfigurations: String get() = res(R.string.main_menu_option_app_configurations)
+    override val mainAccountLogout: String get() = res(R.string.main_account_logout)
 
     private fun res(@StringRes stringId: Int) = context.getString(stringId)
 }

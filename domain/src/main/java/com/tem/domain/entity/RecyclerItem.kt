@@ -1,7 +1,8 @@
 package com.tem.domain.entity
 
 data class RecyclerItem(
-    val icon: Int,
-    val text: String,
+    val recyclerType: RecyclerType,
+    val icon: Int? = null,
+    val text: String? = null,
     val secondaryText: String? = null
 )

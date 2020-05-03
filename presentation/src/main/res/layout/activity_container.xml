@@ -91,9 +91,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_main_options"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="@dimen/spacing_24"
         android:layout_marginEnd="@dimen/spacing_24"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/first_divider"
