@@ -12,4 +12,13 @@ interface StringsProvider {
     val errorSocketTimeout: String
 
     val globalTryAgain: String
+
+    // Main Menu Options
+    val mainMenuOptionHelpMe: String
+    val mainMenuOptionProfile: String
+    val mainMenuOptionAccountConfigure: String
+    val mainMenuOptionCardConfigure: String
+    val mainMenuOptionAskPjAccount: String
+    val mainMenuOptionAppConfigurations: String
+
 }

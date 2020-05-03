@@ -18,6 +18,7 @@
     <string name="main_bank_name">Banco 260 - Nu Pagamentos S.A.</string>
     <string name="main_agency">Agência %d</string>
     <string name="main_account_number">Conta %s</string>
+    <string name="main_account_logout">Sair da conta</string>
 
     <!-- Main Menu Options -->
     <string name="main_menu_option_help_me">Me ajuda</string>

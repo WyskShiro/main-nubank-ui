@@ -21,5 +21,13 @@ class AndroidStringProvider @Inject constructor(context: Context) : StringsProvi
 
     override val globalTryAgain: String get() = "Try again"
 
+    // Main Menu Options
+    override val mainMenuOptionHelpMe: String get() = res(R.string.main_menu_option_help_me)
+    override val mainMenuOptionProfile: String get() = res(R.string.main_menu_option_profile)
+    override val mainMenuOptionAccountConfigure: String get() = res(R.string.main_menu_option_account_configure)
+    override val mainMenuOptionCardConfigure: String get() = res(R.string.main_menu_option_card_configure)
+    override val mainMenuOptionAskPjAccount: String get() = res(R.string.main_menu_option_ask_pj_account)
+    override val mainMenuOptionAppConfigurations: String get() = res(R.string.main_menu_option_app_configurations)
+
     private fun res(@StringRes stringId: Int) = context.getString(stringId)
 }
