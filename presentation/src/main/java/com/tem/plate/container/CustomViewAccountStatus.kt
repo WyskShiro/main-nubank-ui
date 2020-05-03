@@ -3,6 +3,7 @@ package com.tem.plate.container
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -20,13 +21,42 @@ class CustomViewAccountStatus @JvmOverloads constructor(
     }
 
     private val binding: CustomViewAccountStatusBinding
+    private var originalY: Float = 0f
+    var dY = 0f
 
     init {
         binding = CustomViewAccountStatusBinding.inflate(inflater, this, true)
+        binding.viewPager.setCallback(::onDrag)
     }
 
     fun setAdapter(fragmentManager: FragmentManager) {
         binding.viewPager.adapter = AccountStatusAdapter(fragmentManager)
+    }
+
+    fun onDrag(motionEvent: MotionEvent) {
+        if (originalY == 0F) {
+            val a = IntArray(2)
+            binding.root.getLocationOnScreen(a)
+            originalY = a[1].toFloat()
+        }
+        when (motionEvent.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                dY = originalY - motionEvent.rawY
+            }
+            MotionEvent.ACTION_MOVE -> {
+                animate()
+                    .y(motionEvent.rawY + dY)
+                    .setDuration(0)
+                    .start()
+            }
+            MotionEvent.ACTION_UP -> {
+                animate()
+                    .y(originalY)
+                    .setDuration(0)
+                    .start()
+            }
+        }
+        true
     }
 
     private inner class AccountStatusAdapter(
