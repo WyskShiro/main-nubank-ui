@@ -2,24 +2,57 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/spacing_8"
+    android:paddingBottom="@dimen/spacing_8">
 
     <ImageView
         android:id="@+id/image_view_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_option_secondary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/text_view_option" />
 
     <TextView
-        android:id="@+id/text_view_option"
+        android:id="@+id/text_view_main"
+        style="@style/NormalText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_8"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/image_view_action_indicator"
         app:layout_constraintStart_toEndOf="@id/image_view_icon"
         app:layout_constraintTop_toTopOf="parent"
+        tools:text="Opção de teste" />
+
+    <TextView
+        android:id="@+id/text_view_option"
+        style="@style/NormalText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_8"
+        app:layout_constraintEnd_toStartOf="@id/image_view_action_indicator"
+        app:layout_constraintStart_toEndOf="@id/image_view_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Opção de teste" />
+
+    <TextView
+        android:id="@+id/text_view_option_secondary"
+        style="@style/SmallText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_8"
+        android:textColor="@color/white_alpha30"
+        app:layout_constraintEnd_toStartOf="@id/image_view_action_indicator"
+        app:layout_constraintStart_toEndOf="@id/image_view_icon"
+        app:layout_constraintTop_toBottomOf="@id/text_view_option"
         tools:text="Opção de teste" />
 
     <ImageView
@@ -28,6 +61,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/ic_arrow"
         android:rotation="270"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_option_secondary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/text_view_option" />
 </androidx.constraintlayout.widget.ConstraintLayout>

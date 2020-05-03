@@ -15,14 +15,15 @@
     <string name="global_cancel">Cancel</string>
 
     <!-- Main activity -->
-    <string name="main_bank_name">Banco 260 - Nu Pagamentos S.A.</string>
-    <string name="main_agency">Agência %d</string>
-    <string name="main_account_number">Conta %s</string>
+    <string name="main_bank_name">Banco <b>260 - Nu Pagamentos S.A.</b></string>
+    <string name="main_agency">Agência <b>%d</b></string>
+    <string name="main_account_number">Conta <b>%s</b></string>
     <string name="main_account_logout">Sair da conta</string>
 
     <!-- Main Menu Options -->
     <string name="main_menu_option_help_me">Me ajuda</string>
     <string name="main_menu_option_profile">Perfil</string>
+    <string name="main_menu_option_profile_secondary">Nome de preferência, telefone, e-mail</string>
     <string name="main_menu_option_account_configure">Configurar conta</string>
     <string name="main_menu_option_card_configure">Configurar Cartão</string>
     <string name="main_menu_option_ask_pj_account">Pedir conta PJ</string>

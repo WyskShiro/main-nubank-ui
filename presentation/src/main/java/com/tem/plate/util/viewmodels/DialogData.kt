@@ -1,6 +1,6 @@
 package com.tem.plate.util.viewmodels
 
-import com.tem.domain.util.StringsProvider
+import com.tem.domain.util.Strings
 
 class DialogData(
     val title: String,
@@ -68,7 +68,7 @@ class DialogData(
         }
 
         fun error(
-            strings: StringsProvider,
+            strings: Strings,
             message: String,
             confirmButtonText: String? = null,
             onConfirm: (() -> Unit)? = null,
@@ -87,7 +87,7 @@ class DialogData(
         }
 
         fun yesOrNo(
-            strings: StringsProvider,
+            strings: Strings,
             title: String,
             message: String,
             onConfirm: () -> Unit,

@@ -1,7 +1,7 @@
 package com.tem.domain.util
 
 // Declare the strings you want to use in domain and are located in the strings.xml in presentation
-interface StringsProvider {
+interface Strings {
     val title: String
     val confirm: String
     val cancel: String
@@ -16,6 +16,7 @@ interface StringsProvider {
     // Main Menu Options
     val mainMenuOptionHelpMe: String
     val mainMenuOptionProfile: String
+    val mainMenuOptionProfileSecondary: String
     val mainMenuOptionAccountConfigure: String
     val mainMenuOptionCardConfigure: String
     val mainMenuOptionAskPjAccount: String

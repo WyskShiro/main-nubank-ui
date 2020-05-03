@@ -2,12 +2,11 @@ package com.tem.plate.util.resources
 
 import android.content.Context
 import androidx.annotation.StringRes
-import com.tem.domain.util.StringsProvider
+import com.tem.domain.util.Strings
 import com.tem.plate.R
 import javax.inject.Inject
 
-// The class that actually access context and the strings
-class AndroidStringProvider @Inject constructor(context: Context) : StringsProvider {
+class AndroidStrings @Inject constructor(context: Context) : Strings {
     private val context = context.applicationContext
 
     override val title: String get() = res(R.string.title)
@@ -24,6 +23,7 @@ class AndroidStringProvider @Inject constructor(context: Context) : StringsProvi
     // Main Menu Options
     override val mainMenuOptionHelpMe: String get() = res(R.string.main_menu_option_help_me)
     override val mainMenuOptionProfile: String get() = res(R.string.main_menu_option_profile)
+    override val mainMenuOptionProfileSecondary: String get() = res(R.string.main_menu_option_profile_secondary)
     override val mainMenuOptionAccountConfigure: String get() = res(R.string.main_menu_option_account_configure)
     override val mainMenuOptionCardConfigure: String get() = res(R.string.main_menu_option_card_configure)
     override val mainMenuOptionAskPjAccount: String get() = res(R.string.main_menu_option_ask_pj_account)

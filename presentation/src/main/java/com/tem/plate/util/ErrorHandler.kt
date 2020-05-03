@@ -3,13 +3,13 @@ package com.tem.plate.util
 import com.tem.data.util.request.RequestException
 import com.tem.domain.entity.error.HttpError
 import com.tem.domain.util.Logger
-import com.tem.domain.util.StringsProvider
+import com.tem.domain.util.Strings
 import com.tem.plate.util.viewmodels.DialogData
 import com.tem.plate.util.viewmodels.Placeholder
 import javax.inject.Inject
 
 class ErrorHandler @Inject constructor(
-    private val strings: StringsProvider,
+    private val strings: Strings,
     private val logger: Logger
 ) {
 

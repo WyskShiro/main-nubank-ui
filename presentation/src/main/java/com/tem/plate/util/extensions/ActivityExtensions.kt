@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import com.tem.plate.R
 
 // toolbar
 
@@ -24,4 +27,10 @@ fun AppCompatActivity.hideSoftKeyboard() {
 
 fun AppCompatActivity.showSoftKeyboard() {
     window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+}
+
+fun RecyclerView.getLineDivider(): DividerItemDecoration {
+    return DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
+        setDrawable(context.getDrawable(R.drawable.line_divider))
+    }
 }
