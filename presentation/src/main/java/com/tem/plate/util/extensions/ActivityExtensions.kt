@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.tem.plate.R
@@ -31,6 +32,6 @@ fun AppCompatActivity.showSoftKeyboard() {
 
 fun RecyclerView.getLineDivider(): DividerItemDecoration {
     return DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
-        setDrawable(context.getDrawable(R.drawable.line_divider))
+        context.getDrawable(R.drawable.line_divider)?.let(::setDrawable)
     }
 }

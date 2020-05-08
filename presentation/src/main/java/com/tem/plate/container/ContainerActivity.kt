@@ -47,6 +47,7 @@ class ContainerActivity : BaseActivity() {
 
     private fun setupUi() {
         setupRecyclerView()
+        binding.expandLevel = 0f
         // Set clicklisteners and textListeners
     }
 

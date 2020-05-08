@@ -59,7 +59,6 @@ class CustomViewAccountStatus @JvmOverloads constructor(
                     .start()
             }
         }
-        true
     }
 
     private inner class AccountStatusAdapter(
