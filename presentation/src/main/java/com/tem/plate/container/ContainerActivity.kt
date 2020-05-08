@@ -1,5 +1,8 @@
 package com.tem.plate.container
 
+import android.animation.AnimatorSet
+import android.animation.ValueAnimator
+import android.graphics.Point
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +33,7 @@ class ContainerActivity : BaseActivity() {
     private val actionOptionsAdapter by lazy {
         ActionOptionsAdapter()
     }
+    private var initialTranslationY = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +47,69 @@ class ContainerActivity : BaseActivity() {
         super.subscribeUi()
         viewModel.mainOptions.observeAction(this, ::onMainOptions)
         viewModel.actionOptions.observeAction(this, ::onActionOptions)
+        viewModel.isExpanded.observeAction(this) {
+            it?.let {
+                if (initialTranslationY == 0f) {
+                    val a = IntArray(2)
+                    binding.customViewAccountStatus.getLocationOnScreen(a)
+                    initialTranslationY = binding.customViewAccountStatus.y
+                }
+                if (it) {
+                    val display = windowManager.defaultDisplay
+                    val size = Point()
+                    display.getSize(size)
+                    val positionAnimator = ValueAnimator.ofFloat(
+                        size.y.toFloat(),
+                        initialTranslationY
+                    )
+                    positionAnimator.addUpdateListener {
+                        val value = it.animatedValue as Float
+                        binding.customViewAccountStatus.y = value
+                    }
+
+                    val alphaAnimator = ValueAnimator.ofFloat(1f, 0f)
+                    alphaAnimator.addUpdateListener {
+                        val value = it.animatedValue as Float
+                        binding.expandLevel = value
+                    }
+
+                    val animatorSet = AnimatorSet()
+                    animatorSet.play(positionAnimator).with(alphaAnimator)
+                    animatorSet.duration = 2000
+                    animatorSet.start()
+                } else {
+                    val display = windowManager.defaultDisplay
+                    val size = Point()
+                    display.getSize(size)
+                    val positionAnimator = ValueAnimator.ofFloat(
+                        initialTranslationY,
+                        size.y.toFloat()
+                    )
+                    positionAnimator.addUpdateListener {
+                        val value = it.animatedValue as Float
+                        binding.customViewAccountStatus.y = value
+                    }
+
+                    val alphaAnimator = ValueAnimator.ofFloat(0f, 1f)
+                    alphaAnimator.addUpdateListener {
+                        val value = it.animatedValue as Float
+                        binding.expandLevel = value
+                    }
+
+                    val animatorSet = AnimatorSet()
+                    animatorSet.play(positionAnimator).with(alphaAnimator)
+                    animatorSet.duration = 2000
+                    animatorSet.start()
+                }
+            }
+        }
     }
 
     private fun setupUi() {
         setupRecyclerView()
+        binding.imageViewArrow.setOnClickListener {
+            viewModel.toggleExpand()
+        }
         binding.expandLevel = 0f
         // Set clicklisteners and textListeners
     }

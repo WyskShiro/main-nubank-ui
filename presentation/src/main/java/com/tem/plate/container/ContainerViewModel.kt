@@ -15,12 +15,22 @@ class ContainerViewModel @Inject constructor(
 
     val mainOptions: LiveData<List<RecyclerItem>> get() = _mainOptions
     val actionOptions: LiveData<List<RecyclerItem>> get() = _actionOptions
+    val isExpanded: LiveData<Boolean> get() = _isExpanded
 
     private val _mainOptions by lazy { MutableLiveData<List<RecyclerItem>>() }
     private val _actionOptions by lazy { MutableLiveData<List<RecyclerItem>>() }
+    private val _isExpanded by lazy { MutableLiveData<Boolean>() }
 
     init {
         _mainOptions.postValue(getMainOptions.execute())
         _actionOptions.postValue(getActionOptions.execute())
+    }
+
+    fun toggleExpand() {
+        _isExpanded.value?.let {
+            _isExpanded.value = !it
+        } ?: run {
+            _isExpanded.value = false
+        }
     }
 }
