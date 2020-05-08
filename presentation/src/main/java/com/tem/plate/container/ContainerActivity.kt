@@ -1,23 +1,15 @@
 package com.tem.plate.container
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tem.domain.entity.RecyclerItem
-import com.tem.plate.R
 import com.tem.plate.databinding.ActivityContainerBinding
-import com.tem.plate.fragment1.FragmentCreditCard
-//import com.tem.plate.fragment1.Fragment1
 import com.tem.plate.util.di.ViewModelFactory
-import com.tem.plate.util.di.scopes.FragmentScope
 import com.tem.plate.util.extensions.getLineDivider
 import com.tem.plate.util.extensions.observeAction
 import com.tem.plate.util.structure.base.BaseActivity
 import com.tem.plate.util.structure.base.BaseViewModel
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
 import javax.inject.Inject
 
 class ContainerActivity : BaseActivity() {
@@ -33,7 +25,10 @@ class ContainerActivity : BaseActivity() {
         ViewModelProvider(this, viewModelFactory).get(ContainerViewModel::class.java)
     }
     private val mainOptionsAdapter by lazy {
-        MainAdapter()
+        MainOptionsAdapter()
+    }
+    private val actionOptionsAdapter by lazy {
+        ActionOptionsAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +42,7 @@ class ContainerActivity : BaseActivity() {
     override fun subscribeUi() {
         super.subscribeUi()
         viewModel.mainOptions.observeAction(this, ::onMainOptions)
+        viewModel.actionOptions.observeAction(this, ::onActionOptions)
     }
 
     private fun setupUi() {
@@ -58,23 +54,24 @@ class ContainerActivity : BaseActivity() {
         mainOptionsAdapter.submitList(mainOptions)
     }
 
+    private fun onActionOptions(actionOptions: List<RecyclerItem>?) {
+        actionOptionsAdapter.submitList(actionOptions)
+    }
+
     private fun setupRecyclerView() {
         binding.recyclerViewMainOptions.apply {
             layoutManager = LinearLayoutManager(this@ContainerActivity)
             adapter = mainOptionsAdapter
             addItemDecoration(getLineDivider())
         }
+        binding.recyclerViewActionOptions.apply {
+            layoutManager =
+                LinearLayoutManager(this@ContainerActivity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = actionOptionsAdapter
+        }
     }
 
     private fun setupViewPager() {
         binding.customViewAccountStatus.setAdapter(supportFragmentManager)
     }
-}
-
-@Module
-interface ContainerActivityModule {
-
-    @ContributesAndroidInjector
-    @FragmentScope
-    fun contributesFragmentCreditCard(): FragmentCreditCard
 }

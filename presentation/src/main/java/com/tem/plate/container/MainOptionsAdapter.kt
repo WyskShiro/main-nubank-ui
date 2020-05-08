@@ -8,7 +8,7 @@ import com.tem.domain.entity.RecyclerItem
 import com.tem.domain.entity.RecyclerType
 import com.tem.plate.util.CustomExceptions
 
-class MainAdapter : ListAdapter<RecyclerItem, RecyclerView.ViewHolder>(MainAdapterDiffUtil) {
+class MainOptionsAdapter : ListAdapter<RecyclerItem, RecyclerView.ViewHolder>(MainOptionsAdapterDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -27,7 +27,7 @@ class MainAdapter : ListAdapter<RecyclerItem, RecyclerView.ViewHolder>(MainAdapt
     }
 }
 
-object MainAdapterDiffUtil : DiffUtil.ItemCallback<RecyclerItem>() {
+object MainOptionsAdapterDiffUtil : DiffUtil.ItemCallback<RecyclerItem>() {
     override fun areItemsTheSame(oldItem: RecyclerItem, newItem: RecyclerItem): Boolean {
         return oldItem == newItem
     }
