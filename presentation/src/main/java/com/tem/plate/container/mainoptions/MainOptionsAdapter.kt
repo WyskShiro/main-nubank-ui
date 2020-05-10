@@ -1,4 +1,4 @@
-package com.tem.plate.container
+package com.tem.plate.container.mainoptions
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tem.domain.entity.RecyclerItem
 import com.tem.domain.entity.RecyclerType
+import com.tem.plate.container.MainOptionsAdapterDiffUtil
 import com.tem.plate.util.CustomExceptions
 
-class MainOptionsAdapter : ListAdapter<RecyclerItem, RecyclerView.ViewHolder>(MainOptionsAdapterDiffUtil) {
+class MainOptionsAdapter : ListAdapter<RecyclerItem, RecyclerView.ViewHolder>(
+    MainOptionsAdapterDiffUtil
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -27,12 +30,3 @@ class MainOptionsAdapter : ListAdapter<RecyclerItem, RecyclerView.ViewHolder>(Ma
     }
 }
 
-object MainOptionsAdapterDiffUtil : DiffUtil.ItemCallback<RecyclerItem>() {
-    override fun areItemsTheSame(oldItem: RecyclerItem, newItem: RecyclerItem): Boolean {
-        return oldItem == newItem
-    }
-
-    override fun areContentsTheSame(oldItem: RecyclerItem, newItem: RecyclerItem): Boolean {
-        return oldItem == newItem
-    }
-}

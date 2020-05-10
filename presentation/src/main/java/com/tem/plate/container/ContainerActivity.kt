@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tem.domain.entity.RecyclerItem
+import com.tem.plate.container.accountstatus.AccountStatusAdapter
+import com.tem.plate.container.actionoptions.ActionOptionsAdapter
+import com.tem.plate.container.mainoptions.MainOptionsAdapter
 import com.tem.plate.databinding.ActivityContainerBinding
 import com.tem.plate.util.di.ViewModelFactory
 import com.tem.plate.util.extensions.getLineDivider
@@ -33,13 +36,15 @@ class ContainerActivity : BaseActivity() {
     private val actionOptionsAdapter by lazy {
         ActionOptionsAdapter()
     }
+    private val accountStatusAdapter by lazy {
+        AccountStatusAdapter()
+    }
     private var initialY = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityContainerBinding.inflate(layoutInflater)
         setupUi()
-        setupViewPager()
         setContentView(binding.root)
     }
 
@@ -64,6 +69,7 @@ class ContainerActivity : BaseActivity() {
 
     private fun onActionOptions(actionOptions: List<RecyclerItem>?) {
         actionOptionsAdapter.submitList(actionOptions)
+        accountStatusAdapter.submitList(actionOptions)
     }
 
     private fun setupRecyclerView() {
@@ -77,16 +83,16 @@ class ContainerActivity : BaseActivity() {
                 LinearLayoutManager(this@ContainerActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = actionOptionsAdapter
         }
-    }
-
-    private fun setupViewPager() {
-        binding.customViewAccountStatus.setAdapter(supportFragmentManager)
+        binding.recyclerViewAccountStatus.apply {
+            layoutManager = LinearLayoutManager(this@ContainerActivity)
+            adapter = accountStatusAdapter
+        }
     }
 
     private fun flipMenusVisibility(visibility: Boolean?) {
         visibility?.let {
             if (initialY == 0f) {
-                initialY = binding.customViewAccountStatus.y
+                initialY = binding.recyclerViewAccountStatus.y
             }
             val positionAnimator = if (it) {
                 ValueAnimator.ofFloat(getScreenHeight(), initialY)
@@ -99,7 +105,7 @@ class ContainerActivity : BaseActivity() {
                 ValueAnimator.ofFloat(0f, 1f)
             }
             positionAnimator.addUpdateListener {
-                binding.customViewAccountStatus.y = it.animatedValue as Float
+                binding.recyclerViewAccountStatus.y = it.animatedValue as Float
             }
             alphaAnimator.addUpdateListener {
                 binding.expandLevel = it.animatedValue as Float

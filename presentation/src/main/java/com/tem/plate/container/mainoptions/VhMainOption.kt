@@ -1,14 +1,13 @@
-package com.tem.plate.container
+package com.tem.plate.container.mainoptions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tem.domain.entity.RecyclerItem
-import com.tem.plate.databinding.VhActionOptionBinding
 import com.tem.plate.databinding.VhMainOptionBinding
 
-class VhActionOption private constructor(
-    private val binding: VhActionOptionBinding
+class VhMainOption private constructor(
+    private val binding: VhMainOptionBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun setupVh(recyclerItem: RecyclerItem) {
@@ -16,16 +15,21 @@ class VhActionOption private constructor(
             recyclerItem.icon?.let {
                 imageViewIcon.background = root.context.getDrawable(it)
             }
-            textViewName.text = recyclerItem.text
+            recyclerItem.secondaryText?.let {
+                textViewOption.text = recyclerItem.text
+                textViewOptionSecondary.text = it
+            } ?: run {
+                textViewMain.text = recyclerItem.text
+            }
         }
     }
 
     companion object {
         fun inflate(
             parent: ViewGroup
-        ): VhActionOption {
-            return VhActionOption(
-                VhActionOptionBinding.inflate(
+        ): VhMainOption {
+            return VhMainOption(
+                VhMainOptionBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

@@ -1,8 +1,9 @@
-package com.tem.plate.container
+package com.tem.plate.container.actionoptions
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.tem.domain.entity.RecyclerItem
+import com.tem.plate.container.MainOptionsAdapterDiffUtil
 
 class ActionOptionsAdapter : ListAdapter<RecyclerItem, VhActionOption>(MainOptionsAdapterDiffUtil) {
 

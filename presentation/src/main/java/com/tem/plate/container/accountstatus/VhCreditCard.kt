@@ -1,23 +1,26 @@
-package com.tem.plate.container
+package com.tem.plate.container.accountstatus
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tem.domain.entity.RecyclerItem
-import com.tem.plate.databinding.VhLogoutBinding
+import com.tem.plate.databinding.VhCreditCardBinding
 
-class VhMainLogout private constructor(
-    private val binding: VhLogoutBinding
+class VhCreditCard private constructor(
+    private val binding: VhCreditCardBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun setupVh(recyclerItem: RecyclerItem) {
-        binding.logoutButton.text = recyclerItem.text
+        binding.apply {
+        }
     }
 
     companion object {
-        fun inflate(parent: ViewGroup): VhMainLogout {
-            return VhMainLogout(
-                VhLogoutBinding.inflate(
+        fun inflate(
+            parent: ViewGroup
+        ): VhCreditCard {
+            return VhCreditCard(
+                VhCreditCardBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
