@@ -2,12 +2,12 @@
 <layout>
 
     <data>
-
         <variable
-            name="expandLevel"
-            type="Float" />
-    </data>
+            name="isVisible"
+            type="Boolean" />
 
+        <import type="android.view.View" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -51,8 +51,8 @@
             android:id="@+id/image_view_qrcode"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:alpha="@{expandLevel}"
             android:background="@drawable/qrcode"
+            android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
             app:layout_constraintDimensionRatio="H, 1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.33"
@@ -63,10 +63,11 @@
         <LinearLayout
             android:id="@+id/linear_layout_account_description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="@{expandLevel}"
+            android:layout_height="0dp"
             android:gravity="center"
             android:orientation="vertical"
+            android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view_action_options"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_view_qrcode">
@@ -105,6 +106,7 @@
                 android:layout_marginStart="@dimen/spacing_24"
                 android:layout_marginEnd="@dimen/spacing_24"
                 android:overScrollMode="never"
+                android:paddingBottom="100dp"
                 tools:listitem="@layout/vh_main_option" />
         </LinearLayout>
 
@@ -114,17 +116,17 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginEnd="@dimen/spacing_16"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view_action_options"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_view_arrow"
-            app:layout_constraintBottom_toTopOf="@id/barrier_action"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_arrow" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="top"
-            app:constraint_referenced_ids="recycler_view_action_options" />
+            app:constraint_referenced_ids="recycler_view_account_status" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_action_options"
@@ -133,7 +135,6 @@
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginBottom="@dimen/spacing_16"
             android:overScrollMode="never"
-            android:alpha="@{1f - expandLevel}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
