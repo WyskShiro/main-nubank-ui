@@ -4,9 +4,12 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Point
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.tem.plate.R
 import com.tem.plate.util.viewmodels.DialogData
@@ -24,8 +27,10 @@ fun Context.showDialog(dialogData: DialogData): Dialog {
     if (dialogData.confirmButtonText == null && dialogData.onConfirm == null) {
         builder.setPositiveButton(dialogData.dismissButtonText, dialogData.onDismiss)
     } else {
-        builder.setPositiveButton(dialogData.confirmButtonText, dialogData.onConfirm
-            ?: dialogData.onDismiss)
+        builder.setPositiveButton(
+            dialogData.confirmButtonText, dialogData.onConfirm
+                ?: dialogData.onDismiss
+        )
         if (dialogData.dismissButtonText != null || dialogData.onDismiss != null) {
             builder.setNegativeButton(dialogData.dismissButtonText, dialogData.onDismiss)
         }
@@ -35,12 +40,18 @@ fun Context.showDialog(dialogData: DialogData): Dialog {
     return builder.show()
 }
 
-fun AlertDialog.Builder.setPositiveButton(buttonText: String?, onClick: (() -> Unit)?): AlertDialog.Builder = setPositiveButton(
+fun AlertDialog.Builder.setPositiveButton(
+    buttonText: String?,
+    onClick: (() -> Unit)?
+): AlertDialog.Builder = setPositiveButton(
     buttonText ?: context.getString(R.string.global_ok),
     onClick?.let { { _: DialogInterface, _: Int -> it() } }
 )
 
-fun AlertDialog.Builder.setNegativeButton(buttonText: String?, onClick: (() -> Unit)?): AlertDialog.Builder = setNegativeButton(
+fun AlertDialog.Builder.setNegativeButton(
+    buttonText: String?,
+    onClick: (() -> Unit)?
+): AlertDialog.Builder = setNegativeButton(
     buttonText ?: context.getString(R.string.global_cancel),
     onClick?.let { { _: DialogInterface, _: Int -> it() } }
 )
@@ -51,3 +62,10 @@ fun Context.colorCompat(@ColorRes colorId: Int) = ContextCompat.getColor(this, c
 
 fun Context.drawableCompat(@DrawableRes drawableId: Int) =
     ContextCompat.getDrawable(this, drawableId)
+
+fun AppCompatActivity.getScreenHeight(): Float {
+    val display = windowManager.defaultDisplay
+    val size = Point()
+    display.getSize(size)
+    return size.y.toFloat()
+}

@@ -2,7 +2,6 @@ package com.tem.plate.container
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
-import android.graphics.Point
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +9,7 @@ import com.tem.domain.entity.RecyclerItem
 import com.tem.plate.databinding.ActivityContainerBinding
 import com.tem.plate.util.di.ViewModelFactory
 import com.tem.plate.util.extensions.getLineDivider
+import com.tem.plate.util.extensions.getScreenHeight
 import com.tem.plate.util.extensions.observeAction
 import com.tem.plate.util.structure.base.BaseActivity
 import com.tem.plate.util.structure.base.BaseViewModel
@@ -33,7 +33,7 @@ class ContainerActivity : BaseActivity() {
     private val actionOptionsAdapter by lazy {
         ActionOptionsAdapter()
     }
-    private var initialTranslationY = 0f
+    private var initialY = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,62 +47,7 @@ class ContainerActivity : BaseActivity() {
         super.subscribeUi()
         viewModel.mainOptions.observeAction(this, ::onMainOptions)
         viewModel.actionOptions.observeAction(this, ::onActionOptions)
-        viewModel.isExpanded.observeAction(this) {
-            it?.let {
-                if (initialTranslationY == 0f) {
-                    val a = IntArray(2)
-                    binding.customViewAccountStatus.getLocationOnScreen(a)
-                    initialTranslationY = binding.customViewAccountStatus.y
-                }
-                if (it) {
-                    val display = windowManager.defaultDisplay
-                    val size = Point()
-                    display.getSize(size)
-                    val positionAnimator = ValueAnimator.ofFloat(
-                        size.y.toFloat(),
-                        initialTranslationY
-                    )
-                    positionAnimator.addUpdateListener {
-                        val value = it.animatedValue as Float
-                        binding.customViewAccountStatus.y = value
-                    }
-
-                    val alphaAnimator = ValueAnimator.ofFloat(1f, 0f)
-                    alphaAnimator.addUpdateListener {
-                        val value = it.animatedValue as Float
-                        binding.expandLevel = value
-                    }
-
-                    val animatorSet = AnimatorSet()
-                    animatorSet.play(positionAnimator).with(alphaAnimator)
-                    animatorSet.duration = 2000
-                    animatorSet.start()
-                } else {
-                    val display = windowManager.defaultDisplay
-                    val size = Point()
-                    display.getSize(size)
-                    val positionAnimator = ValueAnimator.ofFloat(
-                        initialTranslationY,
-                        size.y.toFloat()
-                    )
-                    positionAnimator.addUpdateListener {
-                        val value = it.animatedValue as Float
-                        binding.customViewAccountStatus.y = value
-                    }
-
-                    val alphaAnimator = ValueAnimator.ofFloat(0f, 1f)
-                    alphaAnimator.addUpdateListener {
-                        val value = it.animatedValue as Float
-                        binding.expandLevel = value
-                    }
-
-                    val animatorSet = AnimatorSet()
-                    animatorSet.play(positionAnimator).with(alphaAnimator)
-                    animatorSet.duration = 2000
-                    animatorSet.start()
-                }
-            }
-        }
+        viewModel.isExpanded.observeAction(this, ::flipMenusVisibility)
     }
 
     private fun setupUi() {
@@ -111,7 +56,6 @@ class ContainerActivity : BaseActivity() {
             viewModel.toggleExpand()
         }
         binding.expandLevel = 0f
-        // Set clicklisteners and textListeners
     }
 
     private fun onMainOptions(mainOptions: List<RecyclerItem>?) {
@@ -137,5 +81,34 @@ class ContainerActivity : BaseActivity() {
 
     private fun setupViewPager() {
         binding.customViewAccountStatus.setAdapter(supportFragmentManager)
+    }
+
+    private fun flipMenusVisibility(visibility: Boolean?) {
+        visibility?.let {
+            if (initialY == 0f) {
+                initialY = binding.customViewAccountStatus.y
+            }
+            val positionAnimator = if (it) {
+                ValueAnimator.ofFloat(getScreenHeight(), initialY)
+            } else {
+                ValueAnimator.ofFloat(initialY, getScreenHeight())
+            }
+            val alphaAnimator = if(it) {
+                ValueAnimator.ofFloat(1f, 0f)
+            } else {
+                ValueAnimator.ofFloat(0f, 1f)
+            }
+            positionAnimator.addUpdateListener {
+                binding.customViewAccountStatus.y = it.animatedValue as Float
+            }
+            alphaAnimator.addUpdateListener {
+                binding.expandLevel = it.animatedValue as Float
+            }
+            AnimatorSet().apply {
+                play(positionAnimator).with(alphaAnimator)
+                duration = 2000
+                start()
+            }
+        }
     }
 }
